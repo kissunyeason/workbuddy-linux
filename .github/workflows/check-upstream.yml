@@ -69,8 +69,9 @@ jobs:
       - name: Slim deb
         run: |
           bash scripts/slim-deb.sh downloads/workbuddy.deb
-          SLIM_DEB="$(ls -t *.deb | head -1)"
-          mv "$SLIM_DEB" downloads/workbuddy-slim.deb
+          SLIM_DEB="$(ls -t dist/*.deb | head -1)"
+          echo "slim deb: $SLIM_DEB"
+          cp "$SLIM_DEB" downloads/workbuddy-slim.deb
 
       - name: Convert to rpm
         run: |
