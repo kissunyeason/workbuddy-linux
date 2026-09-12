@@ -5,6 +5,10 @@ set -euo pipefail
 
 DEB_IN="${1:?usage: deb-to-rpm.sh <input.deb> [output.rpm]}"
 RPM_OUT="${2:-}"
+DEB_IN="$(readlink -f "$DEB_IN")"
+if [ -n "$RPM_OUT" ]; then
+  RPM_OUT="$(readlink -f "$RPM_OUT")"
+fi
 
 WORK_DIR="$(mktemp -d -t deb2rpm.XXXXXX)"
 trap 'rm -rf "$WORK_DIR"' EXIT
